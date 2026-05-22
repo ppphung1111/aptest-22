@@ -21,6 +21,7 @@
 <video id="vid" controls src="director.mp4" preload="metadata"></video>
 <script>
     var vid = document.getElementById("vid"); // get reference to the video object
+    vid.muted=true;
     var intervalID = null;
     var time = 0;
     var speed = 15; // frames per seconds (fps). Change this value to balance quality against performances
@@ -40,10 +41,10 @@
     };
 
     // clicking the video stops inline playback and triggers native playback including audio. No need to seek.
-    vid.addEventListener('click', function(){
+    document.body.addEventListener('click', function(){
         clearInterval(intervalID);
         intervalID = null;
-        this.play();
+        vid.play();
     });
 
 </script>
