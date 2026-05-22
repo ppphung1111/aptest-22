@@ -1,112 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Video autoplay on iPhone / iPAD</title>
+</head>
+<style>
+    video::-webkit-media-controls{
+        display: none;
+    }
+    video {
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        /* Other transform properties here */
+    }
+</style>
+<body>
+<p>This site does not collect any personal user data. This project is not affiliated with the original and was created solely for educational purposes.</p>
+<video id="vid" controls src="director.mp4" preload="metadata"></video>
+<script>
+    var vid = document.getElementById("vid"); // get reference to the video object
+    var intervalID = null;
+    var time = 0;
+    var speed = 15; // frames per seconds (fps). Change this value to balance quality against performances
 
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Mobileautoplay by amirch1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <style>
-      video::-webkit-media-controls{
-          display: none;
-      }
-      video {
-          -webkit-transform: translateZ(0);
-          -moz-transform: translateZ(0);
-          -ms-transform: translateZ(0);
-          -o-transform: translateZ(0);
-          transform: translateZ(0);
-          /* Other transform properties here */
-      }
-  </style>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Mobile Autoplay</h1>
-      <h2 class="project-tagline">Video autoplay (inline) for iOS mobile devices</h2>
-      <a href="https://github.com/amirch1/MobileAutoPlay" class="btn">View on GitHub</a>
-      <a href="https://github.com/amirch1/MobileAutoPlay/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/amirch1/MobileAutoPlay/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
-
-    <section class="main-content">
-        <h3>
-            <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo (click video for full playback):</h3>
-
-
-        <video id="vid" controls src="director.mp4" preload="metadata"></video>
-        <script>
-            var vid = document.getElementById("vid"); // get reference to the video object
-            var intervalID = null;
-            var time = 0;
-            var speed = 15; // frames per seconds (fps). Change this value to balance quality against performances
-
-            // wait for the onloadedmetadata event to get the video duration
-            vid.onloadedmetadata = function() {
-                var duration = vid.duration;
-                intervalID = setInterval(function(){
-                    time++;
-                    if (time / speed <=  duration){
-                        vid.currentTime = time / speed;
-                    }else{
-                        clearInterval(intervalID);
-                        intervalID = null;
-                    }
-                },1000 / speed);
-            };
-
-            // clicking the video stops inline playback and triggers native playback including audio. No need to seek.
-            vid.addEventListener('click', function(){
+    // wait for the onloadedmetadata event to get the video duration
+    vid.onloadedmetadata = function() {
+        var duration = vid.duration;
+        intervalID = setInterval(function(){
+            time++;
+            if (time / speed <=  duration){
+                vid.currentTime = time / speed;
+            }else{
                 clearInterval(intervalID);
                 intervalID = null;
-                this.play();
-            });
+            }
+        },1000 / speed);
+    };
 
-        </script>
+    // clicking the video stops inline playback and triggers native playback including audio. No need to seek.
+    vid.addEventListener('click', function(){
+        clearInterval(intervalID);
+        intervalID = null;
+        this.play();
+    });
 
-
-      <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Video autoplay (inline) for iOS mobile devices</h3>
-
-<p>The following demo shows automatic video playback on iPhone and iPAD.<br>Playback is muted and plays inline on iPhone as well.</p>
-
-<h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features:</h3>
-
-<p>
-    <ul>
-        <li>Idle for online ads</li>
-        <li>Playback is muted</li>
-        <li>Clicking the video resumes regular playback with audio from the current position</li>
-    </ul>
-</p>
-
-
-
-        <h3>
-            <a class="anchor"  aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Limitations:</h3>
-        <p>
-        <ul>
-            <li>No audio</li>
-            <li>Doesn't work on Android devices</li>
-        </ul>
-        </p>
-
-        <h3>License</h3>
-
-        <p>The code is distributed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a> (MIT). You can use and change it freely as long as you include the copyright notice.</p>
-
-        <footer class="site-footer">
-            <span class="site-footer-owner"><a href="https://github.com/amirch1/VideoInline">Video Inline</a> is maintained by <a href="https://github.com/amirch1">amirch1</a>.</span>
-
-            <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-        </footer>
-
-    </section>
-
-  
-  </body>
+</script>
+</body>
 </html>
