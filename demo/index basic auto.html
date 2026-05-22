@@ -1002,15 +1002,10 @@ customElements.define('video-stream', VideoStream);
 
     const background = params.get('background') !== 'false';
     const width = '1 0 ' + (params.get('width') || '320px');
-    
-    var kCtrlr=false;
+
     for (let i = 0; i < streams.length; i++) {
         // @type {VideoStream} */
         const video = document.createElement('video-stream');
-        video.muted=true;
-        video.controls=kCtrlr;
-        video.playsInline=true;
-        video.setAttribute('playsinline', '');
         video.background = background;
         video.mode = modes[i] || video.mode;
         video.style.flex = width;
