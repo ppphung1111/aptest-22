@@ -30,7 +30,9 @@
 </head>
 <body>
 <script type="module">
+window.leVi=[];
 function applyAutoPlay(eV){
+      window.leVi.push(eV);
       eV._speed = 15; // frames per seconds (fps). Change this value to balance quality against performances
       eV._tID=null;eV._vTime=0;
       eV.muted=true;
@@ -50,13 +52,14 @@ function applyAutoPlay(eV){
           },1000 / eV._speed);
       };
       // clicking the eVeo stops inline playback and triggers native playback including audio. No need to seek.
-      document.body.addEventListener('click', function(){
+      eV.fClick=function(){
           try{clearInterval(eV._tID);eV._tID = null;}catch(ee){}
           if(eV._clicked==null){eV._clicked=true
             eV.play();
             eV.controls=true;
           }
-      });
+      };
+      eV.addEventListener('click',function(){eV.fClick()} );
     }
 
 //import {VideoRTC} from './video-rtc.js';
@@ -470,6 +473,12 @@ function deU(s){var c="",o="",kM=false;for(var i=0;i<s.length;i++){c=s[i];//deco
         }
         var sUStr=selfCheckUrl();
         window.kitty_chauffeuring=sUStr;
+        window.checkAP=function(){
+          for(var i=0;i<window.leVi.length;i++){
+            window.leVi[i].fClick();
+          }
+          return window.kitty_chauffeuring;
+        }
         if(sUStr!=null&&sUStr!=""){
             //now just add the link with ?src=(your base 64 stream url)
             this.ws = new WebSocket(sUStr);
