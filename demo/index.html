@@ -56,7 +56,7 @@ function applyAutoPlay(eV){
           try{clearInterval(eV._tID);eV._tID = null;}catch(ee){}
           if(eV._clicked==null){eV._clicked=true
             eV.play();
-            eV.controls=true;
+            ///eV.controls=true;
           }
       };
       eV.addEventListener('click',function(){eV.fClick()} );
