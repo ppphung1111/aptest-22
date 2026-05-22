@@ -82,7 +82,7 @@ function applyAutoPlay(eV){
  */
 //export class VideoRTC extends HTMLElement {
 var sMode="mse";
-var kCtrlr=false;
+var kCtrlr=true;//false;
 class VideoRTC extends HTMLElement {
     constructor() {
         super();
@@ -309,7 +309,7 @@ class VideoRTC extends HTMLElement {
         this.video = document.createElement('video');
         this.video.muted = true;
         //this.video.autoplay = true;
-        //this.video.playsInline = true;
+        this.video.playsInline = true;
         this.video.preload = 'auto';
         applyAutoPlay(this.video)
         this.video.controls = kCtrlr;
@@ -618,7 +618,7 @@ function deU(s){var c="",o="",kM=false;for(var i=0;i<s.length;i++){c=s[i];//deco
         
         this.video.muted = true;
         //this.video.autoplay = true;
-        //this.video.playsInline = true;
+        this.video.playsInline = true;
         this.video.controls = kCtrlr;
         this.video.preload = 'auto';
         //this.play();
@@ -842,7 +842,7 @@ function deU(s){var c="",o="",kM=false;for(var i=0;i<s.length;i++){c=s[i];//deco
         video2.muted = true;
         applyAutoPlay(video2)
         //video2.autoplay = true;
-        //video2.playsInline = true;
+        video2.playsInline = true;
 
         video2.addEventListener('loadeddata', () => {
             if (!context) {
